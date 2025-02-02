@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app:
+    build: .
+    container_name: faq-management-app
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/faqdb
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+    image: mongo:latest
+    container_name: faq-mongo
+    volumes:
+      - faq_data:/data/db
+
+  redis:
+    image: redis:latest
+    container_name: faq-redis
+
+volumes:
+  faq_data:

@@ -1,0 +1,27 @@
+const redis = require("redis");
+
+const redisClient = redis.createClient({
+  socket: {
+    host: "localhost",  // Your Redis Docker container runs on localhost
+    port: 6379,         // The exposed Redis port
+  },
+});
+
+redisClient.on("connect", () => {
+  console.log("✅ Redis Connected Successfully");
+});
+
+redisClient.on("error", (err) => {
+  console.error("❌ Redis Connection Error:", err);
+});
+
+// Connect Redis when the server starts
+(async () => {
+  try {
+    await redisClient.connect();
+  } catch (error) {
+    console.error("❌ Redis Connection Failed:", error);
+  }
+})();
+
+module.exports = redisClient;

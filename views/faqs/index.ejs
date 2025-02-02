@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Admin Panel</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>FAQ Admin Panel</h1>
+    <a href="/admin/new">➕ Add New FAQ</a>
+    <table border="1">
+        <tr>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Actions</th>
+        </tr>
+        <% faqs.forEach(faq => { %>
+            <tr>
+                <td><%= faq.question %></td>
+                <td><%= faq.answer %></td>
+                <td>
+                    <a href="/admin/<%= faq._id %>/edit">✏️ Edit</a>
+                    <form action="/admin/<%= faq._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit">❌ Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

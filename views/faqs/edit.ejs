@@ -1,0 +1,9 @@
+<form action="/admin/<%= faq._id %>?_method=PUT" method="POST">
+    <label>Question:</label>
+    <input type="text" name="question" value="<%= faq.question %>" required>
+    
+    <label>Answer:</label>
+    <textarea name="answer" required><%= faq.answer %></textarea>
+
+    <button type="submit">Update FAQ</button>
+</form>
